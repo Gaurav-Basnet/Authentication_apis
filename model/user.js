@@ -76,15 +76,24 @@ const userSchema = new mongoose.Schema(
     verificationOTP: String,
     verificationOTPExpires: Date,
 
-      lastOtpSentAt: {
-    type: Date,
-    default: null,
+    lastOtpSentAt: {
+      type: Date,
+      default: null,
+    },
+    refreshTokens: [
+      {
+        token: String,
+        createdAt: {
+          type: Date,
+          default: Date.now,
+        },
+      },
+    ],
   },
-  },
-  
+
   {
     timestamps: true,
-  }
+  },
 );
 
-module.exports = mongoose.model("User", userSchema);
+module.exports = mongoose.models.User || mongoose.model("User", userSchema);
