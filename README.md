@@ -221,6 +221,66 @@ POST /user/refresh-token
 
 ---
 
+### Profile
+
+```
+GET /user/profile
+```
+
+Returns the authenticated user's profile information.
+
+#### Headers
+
+```http
+Authorization: Bearer <accessToken>
+```
+
+#### Example Request
+
+```http
+GET /user/profile
+Authorization: Bearer eyJhbGciOiJIUzI1NiIs...
+```
+
+#### Response
+
+```json
+{
+  "success": true,
+  "user": {
+    "_id": "686f7b6a4d4d8f7e2b1c1234",
+    "firstName": "John",
+    "lastName": "Doe",
+    "username": "johndoe",
+    "email": "john@example.com",
+    "phoneNumber": "9800000000",
+    "role": "user",
+    "status": "active",
+    "emailVerified": true,
+    "phoneVerified": false,
+    "lastLogin": "2026-06-03T08:30:12.000Z",
+    "createdAt": "2026-06-01T10:15:30.000Z",
+    "updatedAt": "2026-06-03T08:30:12.000Z"
+  }
+}
+```
+
+#### Response Codes
+
+| Status Code | Description                     |
+| ----------- | ------------------------------- |
+| 200         | Profile retrieved successfully  |
+| 401         | Missing or invalid access token |
+| 404         | User not found                  |
+| 500         | Internal server error           |
+
+#### Notes
+
+* Requires a valid JWT access token.
+* User information is fetched directly from MongoDB using the authenticated user's ID.
+
+
+
 #### Logout
 ```
 POST /user/logout
