@@ -13,7 +13,7 @@ const {
 
 const { loginUser, refreshToken } = require("../controllers/loginController");
 const { logoutUser } = require("../controllers/logoutController");
-
+const {forgotPassword}=require("../controllers/forgetController");
 
 
 router.post("/register", registerUser);
@@ -27,4 +27,5 @@ router.get("/profile", authenticate, getProfile);
 
 router.post("/logout", authenticate, logoutUser);
 
+router.post("/forgot-password",forgotPassword);
 module.exports = router;
